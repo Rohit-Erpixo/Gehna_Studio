@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', Inter, sans-serif;
+    background-color: #FAF8F3;
+    color: #25241F;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    overscroll-behavior-y: contain;
+    overflow-x: hidden;
+  }
+
+  input, textarea, select {
+    user-select: auto;
+    -webkit-user-select: auto;
+  }
+}
+
+/* ───────── Safe-area (Capacitor / PWA) ───────── */
+.safe-top    { padding-top:    env(safe-area-inset-top, 0px); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pt-safe     { padding-top:    env(safe-area-inset-top, 0px); }
+.pb-safe     { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* ───────── Touch-press feedback ───────── */
+.touch-press { transition: transform 0.12s cubic-bezier(0.16,1,0.3,1), opacity 0.12s ease; }
+.touch-press:active { transform: scale(0.96); opacity: 0.88; }
+
+/* ───────── Custom scrollbar ───────── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-thumb { background: #E8E2D7; border-radius: 9999px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ───────── Gold gradient text ───────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #92772D 0%, #C4A95B 50%, #745D20 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ───────── Status badge variants ───────── */
+.badge-ready       { background:#D1FAE5; color:#065F46; border:1px solid #6EE7B7; }
+.badge-processing  { background:#FEF3C7; color:#92400E; border:1px solid #FCD34D; }
+.badge-approved    { background:#DBEAFE; color:#1E40AF; border:1px solid #93C5FD; }
+.badge-failed      { background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5; }
+
+/* ───────── Slider range ───────── */
+input[type='range'] { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 9999px; background: #E8E2D7; cursor: pointer; }
+input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #92772D; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+
+/* ───────── Animated shimmer skeleton ───────── */
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+.skeleton {
+  background: linear-gradient(90deg, #F4EFE6 25%, #FAF8F3 50%, #F4EFE6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8px;
+}
+
+/* ───────── Image comparison slider ───────── */
+.comparison-container { position:relative; overflow:hidden; border-radius:16px; }
+.comparison-handle {
+  position:absolute; top:0; bottom:0; width:3px;
+  background:#92772D; cursor:ew-resize; z-index:10;
+  transform:translateX(-50%);
+}
+.comparison-handle::before {
+  content:''; position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:28px; height:28px; border-radius:50%;
+  background:#92772D; border:2px solid #fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
+}

@@ -1,0 +1,73 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+
+      <!--
+        Both of these are cross-origin and are hit by the very first thing the
+        app does on boot (session restore -> GET /api/users/me). Without these
+        hints the DNS + TCP + TLS handshakes only start once the JS module graph
+        has finished executing. Preconnecting overlaps them with bundle parsing.
+
+        `crossorigin` is required: these are CORS fetches, and a socket opened
+        without it will not be reused by them. Vite substitutes %VITE_*% at
+        build time.
+      -->
+      <link rel="preconnect" href="https://catalogai-4cjp.onrender.com" crossorigin />
+      <link rel="preconnect" href="https://ziltypukycqqngrjlkwg.supabase.co" crossorigin />
+
+      <link rel="icon" type="image/png" href="/favicon.png" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+      <meta name="color-scheme" content="light" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta
+        name="description"
+        content="Gehna Photo is an AI-powered jewellery photoshoot platform for professional product visuals. Create jewellery photos with AI photoshoot workflows in minutes."
+      />
+      <meta
+        name="keywords"
+        content="gehna, photo, gehna photo, jewellery photoshoot, jewllery photoshoot, ai jewellery photoshoot, ai jewllery photoshoot, ai photoshoot"
+      />
+      <link rel="canonical" href="https://gehnaphoto.com/" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Gehna Photo — Professional Jewellery Photography" />
+      <meta
+        property="og:description"
+        content="Create professional jewellery photoshoots in minutes with AI. Gehna Photo helps jewellers generate catalog-ready product images fast."
+      />
+      <meta property="og:url" content="https://gehnaphoto.com/" />
+      <meta property="og:site_name" content="Gehna Photo" />
+      <meta property="og:image" content="https://gehnaphoto.com/og-image.jpg" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Gehna Photo — Professional Jewellery Photography" />
+      <meta
+        name="twitter:description"
+        content="AI jewellery photoshoot platform for catalog-ready product images in minutes."
+      />
+      <meta name="twitter:image" content="https://gehnaphoto.com/og-image.jpg" />
+      <title>Gehna Photo — Professional Jewellery Photography</title>
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Gehna Photo",
+          "url": "https://gehnaphoto.com/",
+          "description": "AI-powered jewellery photoshoot platform for professional product visuals."
+        }
+      </script>
+      <style>
+        html, body { height: 100%; margin: 0; overflow-x: clip; }
+        html { color-scheme: light; }
+        #root { height: 100%; min-height: 100dvh; }
+      </style>
+      <script type="module" crossorigin src="/assets/index-BfjOhj2J.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/index-Cf7Xkltg.css">
+    </head>
+
+    <body>
+      <div id="root"></div>
+    </body>
+  </html>
+  

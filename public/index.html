@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gehna Photo — AI Jewellery Photoshoot Studio</title>
+  <meta name="description" content="AI-powered luxury jewellery photoshoot platform. Turn raw mobile phone photos into catalog-ready luxury product visuals in seconds.">
+  <link rel="icon" type="image/png" href="/assets/necklace_earringset-Wkr9Vv7w.webp">
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span class="gold-badge">✨ NEW</span>
+      <span>Ultra-HD 4K Jewellery Photoshoots now powered by OpenAI DALL-E 3 & Vision</span>
+      <button class="api-status-btn" id="openApiModalBtn">
+        <span class="status-dot" id="apiStatusDot"></span>
+        <span id="apiStatusText">Configure OpenAI API</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="brand-logo" onclick="switchTab('home')">
+        <div class="logo-gem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 3h12l4 7-10 12L2 10l4-7z"/>
+            <path d="M2 10h20M12 22L7 10 12 3l5 7-5 12z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">GEHNA<span class="gold-accent">PHOTO</span></span>
+          <span class="brand-subtitle">STUDIO AI</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <button class="nav-item active" data-tab="home" onclick="switchTab('home')">Overview</button>
+        <button class="nav-item" data-tab="generator" onclick="switchTab('generator')">AI Studio Generator</button>
+        <button class="nav-item" data-tab="gallery" onclick="switchTab('gallery')">Studio Gallery</button>
+        <button class="nav-item" data-tab="pricing" onclick="switchTab('pricing')">Credits & Pricing</button>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="credit-pill" title="Available photoshoot credits">
+          <svg class="coin-icon" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M12 6v12M15 9.5a3 3 0 0 0-3-2.5h-1a2.5 2.5 0 0 0 0 5h2a2.5 2.5 0 0 1 0 5h-1a3 3 0 0 1-3-2.5"/>
+          </svg>
+          <span id="navCreditsCount">25</span>
+          <span class="credit-label">Credits</span>
+          <button class="plus-btn" onclick="openCreditTopup()" title="Top up credits">+</button>
+        </div>
+
+        <button class="btn btn-primary" onclick="switchTab('generator')">
+          <span>Create Photoshoot</span>
+          <svg viewBox="0 0 20 20" fill="currentColor" class="btn-arrow"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="main-content">
+
+    <!-- TAB 1: HOME OVERVIEW & COMPARISON -->
+    <section id="tab-home" class="tab-pane active">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="hero-glow"></div>
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <div class="luxury-kicker">
+              <span class="star-icon">✦</span>
+              <span>AI PHOTOSHOOTS FOR JEWELLERS</span>
+            </div>
+            <h1 class="hero-headline">
+              Turn Raw Mobile Photos into <span class="gold-gradient-text">Catalogue-Ready</span> Luxury Visuals
+            </h1>
+            <p class="hero-description">
+              Stop spending lakhs on studio rentals, models, and photographers. Upload phone snapshots of rings, necklaces, and bridal sets — Gehna Photo renders magazine-grade 4K jewellery photoshoots in seconds with OpenAI.
+            </p>
+
+            <div class="hero-cta-group">
+              <button class="btn btn-primary btn-lg" onclick="switchTab('generator')">
+                <span>Start AI Photoshoot</span>
+                <span class="btn-tag">1 Credit</span>
+              </button>
+              <button class="btn btn-secondary btn-lg" onclick="openApiModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="key-icon"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                <span>Connect OpenAI Key</span>
+              </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-number">4K Ultra-HD</span>
+                <span class="stat-label">Magazine Quality</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-number">60 Seconds</span>
+                <span class="stat-label">Average Render Time</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-number">95% Saved</span>
+                <span class="stat-label">Compared to Physical Studios</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Before / After Comparison Showcase -->
+          <div class="hero-visual">
+            <div class="compare-card">
+              <div class="compare-card-header">
+                <div class="pill-badge">Interactive Split Viewer</div>
+                <div class="card-controls">
+                  <button class="toggle-sample-btn" onclick="toggleHeroSample(1)">Sample 1: Bridal Set</button>
+                  <button class="toggle-sample-btn" onclick="toggleHeroSample(2)">Sample 2: Diamond Ring</button>
+                </div>
+              </div>
+
+              <!-- Interactive Split Slider Container -->
+              <div class="compare-container" id="compareSliderContainer">
+                <!-- After Image (Background full width) -->
+                <img id="afterImage" src="/assets/landing_animation/output/output-1.jpg" alt="AI Generated Studio Photoshoot" class="compare-img">
+                
+                <!-- Before Image (Clipped container) -->
+                <div class="before-wrapper" id="beforeWrapper">
+                  <img id="beforeImage" src="/assets/landing_animation/input/input-1.jpg" alt="Raw Phone Photo" class="compare-img">
+                  <span class="compare-label label-before">Raw Phone Photo</span>
+                </div>
+
+                <span class="compare-label label-after">Gehna AI Studio Photoshoot</span>
+
+                <!-- Slider Divider & Handle -->
+                <div class="slider-divider" id="sliderDivider">
+                  <div class="slider-handle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div class="compare-footer">
+                <span>Drag the slider left or right to inspect the transformation</span>
+                <button class="quick-try-btn" onclick="loadSampleIntoStudio(1)">Try This In Studio →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Showcase Section -->
+      <section class="section categories-section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-kicker">CURATED JEWELLERY CATEGORIES</span>
+            <h2 class="section-title">Engineered Specifically For High-End Jewellery</h2>
+            <p class="section-subtitle">Every jewellery category utilizes custom gemstone refraction, metal polish shaders, and authentic Indian wedding or international catalogue aesthetics.</p>
+          </div>
+
+          <div class="categories-grid" id="categoriesGrid">
+            <!-- Injected by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Styles Showcase Section -->
+      <section class="section styles-section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-kicker">EDITORIAL & CATALOGUE LOOKS</span>
+            <h2 class="section-title">7 Professional Studio Lighting & Backdrop Themes</h2>
+            <p class="section-subtitle">Select any photoshoot atmosphere with a single click — from Indian Royal Bridal to Minimalist European Jewellery Boutiques.</p>
+          </div>
+
+          <div class="styles-grid" id="stylesShowcaseGrid">
+            <!-- Injected by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="section workflow-section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-kicker">SEAMLESS WORKFLOW</span>
+            <h2 class="section-title">Three Steps to 4K Catalogue Imagery</h2>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-num">01</div>
+              <div class="step-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              </div>
+              <h3>Upload Phone Photo</h3>
+              <p>Snap a picture of your necklace, ring, or earring on any normal tabletop. No professional camera or light setup needed.</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">02</div>
+              <div class="step-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+              <h3>Choose Style & Ratio</h3>
+              <p>Pick from Indian Bridal, Clean Minimal Studio, or Macro closeups. Set ratios for Instagram (1:1), Website (3:4), or Reels (9:16).</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">03</div>
+              <div class="step-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              </div>
+              <h3>Generate in 60s</h3>
+              <p>OpenAI generates your catalogue-ready photoshoot with flawless gold luster and gemstone clarity. Download in print-ready 4K.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- TAB 2: AI STUDIO GENERATOR WIZARD -->
+    <section id="tab-generator" class="tab-pane">
+      <div class="container studio-container">
+        
+        <!-- Studio Wizard Header -->
+        <div class="wizard-header">
+          <div class="wizard-header-text">
+            <h2 class="wizard-title">AI Photoshoot Studio</h2>
+            <p class="wizard-subtitle">Design your catalogue photoshoot with tailored jewellery styling and custom OpenAI prompts.</p>
+          </div>
+
+          <!-- Wizard Progress Stepper -->
+          <div class="wizard-stepper">
+            <div class="stepper-step active" id="stepIndicator1" onclick="jumpToStep(1)">
+              <span class="step-badge">1</span>
+              <span class="step-title">Jewellery Type</span>
+            </div>
+            <div class="stepper-line" id="stepLine1"></div>
+            <div class="stepper-step" id="stepIndicator2" onclick="jumpToStep(2)">
+              <span class="step-badge">2</span>
+              <span class="step-title">Style & Size</span>
+            </div>
+            <div class="stepper-line" id="stepLine2"></div>
+            <div class="stepper-step" id="stepIndicator3" onclick="jumpToStep(3)">
+              <span class="step-badge">3</span>
+              <span class="step-title">Upload Photo</span>
+            </div>
+            <div class="stepper-line" id="stepLine3"></div>
+            <div class="stepper-step" id="stepIndicator4" onclick="jumpToStep(4)">
+              <span class="step-badge">4</span>
+              <span class="step-title">Generate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizard Panes -->
+        <div class="wizard-card">
+
+          <!-- STEP 1: JEWELLERY CATEGORY -->
+          <div class="wizard-pane active" id="wizardPane1">
+            <div class="pane-header">
+              <h3>Step 1: What type of jewellery are you shooting?</h3>
+              <p>Select the piece to apply specialised gem and metal rendering rules.</p>
+            </div>
+
+            <div class="jewelry-type-grid" id="jewelryTypeGrid">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="pane-footer">
+              <span class="selection-feedback" id="categorySelectionFeedback">Select a piece to continue</span>
+              <button class="btn btn-primary" id="btnNextStep1" onclick="goToStep(2)" disabled>
+                Next: Choose Style & Ratio →
+              </button>
+            </div>
+          </div>
+
+
+          <!-- STEP 2: STYLE & RATIO -->
+          <div class="wizard-pane" id="wizardPane2">
+            <div class="pane-header">
+              <h3>Step 2: Choose Photography Style & Output Ratio</h3>
+              <p>Determine the model pose, studio surface, lighting temperature, and canvas dimensions.</p>
+            </div>
+
+            <div class="options-layout">
+              <!-- Left Column: Photography Shot Styles -->
+              <div class="options-group">
+                <h4 class="group-title">Aesthetic Shot Style</h4>
+                <div class="styles-selector-grid" id="stylesSelectorGrid">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+
+              <!-- Right Column: Aspect Ratio & Prompt Enhancement -->
+              <div class="options-group">
+                <h4 class="group-title">Canvas Aspect Ratio</h4>
+                <div class="aspect-ratio-grid" id="aspectRatioGrid">
+                  <!-- Rendered via JS -->
+                </div>
+
+                <div class="custom-prompt-box">
+                  <div class="custom-prompt-header">
+                    <label for="customPromptInput">Prompt Enhancement (Optional)</label>
+                    <span class="prompt-hint">Adds specific details to OpenAI prompt</span>
+                  </div>
+                  <textarea id="customPromptInput" placeholder="e.g. Luxurious white marble table, soft afternoon sunlight reflections, deep emerald accents, velvet background..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="pane-footer">
+              <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+              <button class="btn btn-primary" id="btnNextStep2" onclick="goToStep(3)">
+                Next: Upload Photo →
+              </button>
+            </div>
+          </div>
+
+
+          <!-- STEP 3: UPLOAD PHOTO -->
+          <div class="wizard-pane" id="wizardPane3">
+            <div class="pane-header">
+              <h3>Step 3: Upload your Jewellery Photo</h3>
+              <p>Provide a clear phone snapshot. You can also pick one of our sample pieces to test instantly.</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-zone-wrapper">
+              <div class="drop-zone" id="dropZone">
+                <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" class="file-input-hidden">
+                <div class="drop-zone-content">
+                  <div class="upload-icon-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                    </svg>
+                  </div>
+                  <h4 class="drop-title">Drag & drop your jewellery photo here</h4>
+                  <p class="drop-hint">Supports JPG, PNG, WEBP up to 25MB</p>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput').click()">
+                    Browse Files
+                  </button>
+                </div>
+              </div>
+
+              <!-- Instant Test Preset Chips -->
+              <div class="quick-sample-bar">
+                <span class="quick-sample-label">Or test with 1-click samples:</span>
+                <button type="button" class="sample-chip" onclick="selectSamplePreset('necklace')">
+                  💎 Sample Bridal Necklace
+                </button>
+                <button type="button" class="sample-chip" onclick="selectSamplePreset('ring')">
+                  💍 Sample Solitaire Ring
+                </button>
+              </div>
+            </div>
+
+            <!-- Uploaded Preview Card -->
+            <div class="upload-preview-card" id="uploadPreviewCard" style="display: none;">
+              <div class="preview-img-wrap">
+                <img id="previewImage" src="" alt="Uploaded jewellery">
+                <span class="preview-badge" id="previewBadge">✓ Ready</span>
+              </div>
+              <div class="preview-meta">
+                <h5 id="previewFileName">sample_jewellery.jpg</h5>
+                <p id="previewFileSize">1.2 MB • Photo uploaded</p>
+                <button class="remove-upload-btn" onclick="clearUpload()">Remove & Reupload</button>
+              </div>
+            </div>
+
+            <div class="pane-footer">
+              <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
+              <button class="btn btn-primary" id="btnNextStep3" onclick="goToStep(4)" disabled>
+                Next: Review & Generate →
+              </button>
+            </div>
+          </div>
+
+
+          <!-- STEP 4: REVIEW & LIVE GENERATION -->
+          <div class="wizard-pane" id="wizardPane4">
+            <div class="pane-header">
+              <h3>Step 4: Review Specs & Render Photoshoot</h3>
+              <p>Review your configured parameters before launching the OpenAI image generation job.</p>
+            </div>
+
+            <!-- Review Summary Card -->
+            <div class="review-grid">
+              <!-- Left: Configuration Summary -->
+              <div class="review-details-card">
+                <h4 class="card-title">Photoshoot Configuration</h4>
+                
+                <div class="summary-list">
+                  <div class="summary-item">
+                    <span class="s-label">Jewellery Piece</span>
+                    <span class="s-value" id="summaryJewelleryType">—</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="s-label">Photography Style</span>
+                    <span class="s-value" id="summaryStyle">—</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="s-label">Aspect Ratio</span>
+                    <span class="s-value" id="summaryRatio">—</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="s-label">AI Engine</span>
+                    <span class="s-value" id="summaryEngine">OpenAI DALL-E 3 (HD)</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="s-label">Credit Cost</span>
+                    <span class="s-value gold-text">1 Credit</span>
+                  </div>
+                </div>
+
+                <div class="engine-info-note">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="info-icon"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                  <span id="engineStatusNote">OpenAI API key configured. Your generation will be rendered in full high-definition commercial quality.</span>
+                </div>
+
+                <!-- Launch Button -->
+                <button class="btn btn-primary btn-block btn-lg" id="btnGenerateShoot" onclick="startGenerationJob()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sparkle-icon"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+                  <span>Generate AI Photoshoot Now</span>
+                </button>
+              </div>
+
+              <!-- Right: Live Processing / Result View -->
+              <div class="review-canvas-card" id="reviewCanvasCard">
+                <!-- Idle State -->
+                <div class="canvas-idle-state" id="canvasIdleState">
+                  <div class="idle-img-preview">
+                    <img id="reviewInputImg" src="/assets/landing_animation/input/input-1.jpg" alt="Uploaded input">
+                  </div>
+                  <p class="idle-text">Ready to render. Click "Generate" to start the studio shoot.</p>
+                </div>
+
+                <!-- Generating State -->
+                <div class="canvas-loading-state" id="canvasLoadingState" style="display: none;">
+                  <div class="loading-spinner-ring">
+                    <div class="spinner-gold"></div>
+                  </div>
+                  <h4 class="loading-status-text" id="loadingStatusText">Starting photoshoot generation...</h4>
+                  <p class="loading-subtext">OpenAI is analyzing gold geometry, gem facets, and studio lighting reflections.</p>
+                  
+                  <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progressBarFill"></div>
+                  </div>
+                  <span class="elapsed-timer" id="elapsedTimer">0s elapsed (average: 25-45s)</span>
+                </div>
+
+                <!-- Done State: Final Result Display -->
+                <div class="canvas-result-state" id="canvasResultState" style="display: none;">
+                  <div class="result-img-box">
+                    <img id="resultImageOutput" src="" alt="AI Generated Jewellery Photoshoot">
+                    <span class="result-badge">✦ 4K Render Complete</span>
+                  </div>
+
+                  <div class="result-action-bar">
+                    <a id="btnDownloadOutput" href="#" download="gehna_photoshoot_4k.jpg" class="btn btn-primary">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="down-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                      <span>Download 4K Image</span>
+                    </a>
+                    <button class="btn btn-secondary" onclick="openResultInModal()">Zoom In</button>
+                    <button class="btn btn-ghost" onclick="resetStudioWizard()">New Shoot</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pane-footer" id="paneFooterReview">
+              <button class="btn btn-secondary" onclick="goToStep(3)">← Back to Upload</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 3: STUDIO GALLERY -->
+    <section id="tab-gallery" class="tab-pane">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">PORTFOLIO & ASSETS</span>
+          <h2 class="section-title">Studio Photoshoot Gallery</h2>
+          <p class="section-subtitle">All your generated jewellery photoshoots are archived here in full high-resolution.</p>
+        </div>
+
+        <div class="gallery-filter-bar">
+          <div class="filter-pills" id="galleryFilterPills">
+            <button class="filter-pill active" onclick="filterGallery('all')">All Pieces</button>
+            <button class="filter-pill" onclick="filterGallery('jewellery_set')">Jewellery Sets</button>
+            <button class="filter-pill" onclick="filterGallery('necklace')">Necklaces</button>
+            <button class="filter-pill" onclick="filterGallery('ring')">Rings</button>
+            <button class="filter-pill" onclick="filterGallery('earring')">Earrings</button>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="switchTab('generator')">+ New Photoshoot</button>
+        </div>
+
+        <div class="gallery-grid" id="studioGalleryGrid">
+          <!-- Loaded via JS -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 4: CREDITS & PRICING -->
+    <section id="tab-pricing" class="tab-pane">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">TRANSPARENT VALUE</span>
+          <h2 class="section-title">Photoshoot Credit Bundles</h2>
+          <p class="section-subtitle">1 Credit = 1 Full 4K Studio Photoshoot. No monthly commitments, credits never expire.</p>
+        </div>
+
+        <div class="pricing-cards-grid" id="pricingCardsGrid">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand-title">GEHNA<span class="gold-accent">PHOTO</span> STUDIO</div>
+        <p>AI-powered commercial jewellery photography for jewellers, wholesalers, and e-commerce brands.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home" onclick="switchTab('home')">Overview</a>
+        <a href="#generator" onclick="switchTab('generator')">Studio Generator</a>
+        <a href="#gallery" onclick="switchTab('gallery')">Gallery</a>
+        <a href="#pricing" onclick="switchTab('pricing')">Credits</a>
+        <button class="footer-api-link" onclick="openApiModal()">OpenAI API Config</button>
+      </div>
+
+      <div class="footer-copy">
+        © 2026 Gehna Photo AI Studio. Reverse-Engineered & Enhanced with OpenAI.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- MODAL 1: OPENAI API KEY SETTINGS -->
+  <div class="modal-backdrop" id="apiModalBackdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="modal-icon"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          <h3>Configure OpenAI API Key</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeApiModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-desc">
+          Gehna Photo connects to your OpenAI API account to run <strong>DALL-E 3 (HD)</strong> and <strong>GPT-4o Vision</strong>. Your key is stored securely in your browser and sent directly to the local backend.
+        </p>
+
+        <div class="form-group">
+          <label for="apiKeyInput">OpenAI API Key (sk-...)</label>
+          <div class="input-with-button">
+            <input type="password" id="apiKeyInput" placeholder="sk-proj-xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnToggleKeyVisibility" onclick="toggleKeyVisibility()">Show</button>
+          </div>
+        </div>
+
+        <div class="api-key-status-msg" id="apiKeyStatusMsg"></div>
+
+        <div class="model-selection-group">
+          <label>Engine Quality</label>
+          <div class="model-pills">
+            <label class="model-radio">
+              <input type="radio" name="dalleQuality" value="hd" checked>
+              <span>DALL-E 3 HD (Recommended for Jewellery)</span>
+            </label>
+            <label class="model-radio">
+              <input type="radio" name="dalleQuality" value="standard">
+              <span>DALL-E 3 Standard</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeApiModal()">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveApiKey" onclick="saveApiKey()">Save & Verify Key</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL 2: LIGHTBOX ZOOM -->
+  <div class="modal-backdrop" id="zoomModalBackdrop" onclick="closeZoomModal(event)">
+    <div class="zoom-dialog">
+      <button class="modal-close-btn zoom-close" onclick="closeZoomModal()">✕</button>
+      <img id="zoomModalImg" src="" alt="Enlarged jewellery photo">
+      <div class="zoom-caption" id="zoomCaption">4K Master Photoshoot Asset</div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
