@@ -45,14 +45,14 @@ export const TemplatesPage: React.FC<TemplatesPageProps> = ({ templates = [] }) 
   });
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-[80px]">
+    <div>
       {/* Header */}
       <div className="px-4 pt-4 pb-3">
         <h1 className="font-['Cinzel',serif] text-[20px] font-bold text-[#25241F]">Style Templates</h1>
         <p className="text-[12px] text-[#636059] mt-0.5">Choose a photography style for your products</p>
 
         {/* Search */}
-        <div className="relative mt-3">
+        <div className="relative mt-3 sm:max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8F8B82]" />
           <input
             type="text"
@@ -80,7 +80,7 @@ export const TemplatesPage: React.FC<TemplatesPageProps> = ({ templates = [] }) 
       </div>
 
       {/* Template grid */}
-      <div className="px-4 grid grid-cols-2 gap-3">
+      <div className="px-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {filtered.map(tmpl => (
           <div
             key={tmpl.id}

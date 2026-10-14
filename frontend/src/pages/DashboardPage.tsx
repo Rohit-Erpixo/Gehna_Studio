@@ -55,7 +55,7 @@ const statusConfig: Record<string, { label: string; cls: string }> = {
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
   const cfg = statusConfig[status] || { label: status, cls: 'badge-ready' };
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${cfg.cls}`}>
+    <span className={`absolute top-2 left-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${cfg.cls}`}>
       {cfg.label}
     </span>
   );
@@ -75,7 +75,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const templates = favouriteTemplates.length > 0 ? favouriteTemplates : MOCK_TEMPLATES;
 
   return (
-    <div className="pb-[80px] bg-[#FAF8F3]">
+    <div>
 
       {/* ─── Credits Bar ─── */}
       <div className="px-4 pt-3 pb-1">
@@ -116,7 +116,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         {/* Create Photoshoot CTA */}
         <button
           onClick={() => navigate('/create')}
-          className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#92772D] text-white font-bold text-[14px] shadow-[0_4px_16px_rgba(146,119,45,0.35)] touch-press"
+          className="w-full sm:w-auto sm:px-10 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#92772D] text-white font-bold text-[14px] shadow-[0_4px_16px_rgba(146,119,45,0.35)] touch-press"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
@@ -127,41 +127,41 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
       {/* ─── 3 Workflow Cards ─── */}
       <div className="px-4 pt-4">
-        <div className="grid grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
           {/* Product Photography */}
           <button
             onClick={() => navigate('/create?mode=product')}
-            className="bg-white rounded-2xl border border-[#E8E2D7] p-3 flex flex-col items-center gap-1.5 touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+            className="bg-white rounded-2xl border border-[#E8E2D7] p-3 flex flex-col items-center gap-1.5 sm:flex-row sm:gap-3 sm:p-4 touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
           >
-            <div className="w-11 h-11 rounded-xl bg-[#F4EFE6] flex items-center justify-center">
+            <div className="w-11 h-11 rounded-xl bg-[#F4EFE6] flex items-center justify-center shrink-0">
               <img src="/assets/necklace_earringset-Wkr9Vv7w.webp" alt="" className="w-8 h-8 object-contain" />
             </div>
-            <span className="text-[11px] font-semibold text-[#25241F] text-center leading-tight">Product Photography</span>
+            <span className="text-[11px] font-semibold text-[#25241F] text-center sm:text-left sm:text-[13px] leading-tight">Product Photography</span>
           </button>
 
           {/* Batch Photography */}
           <button
             onClick={() => navigate('/create?mode=batch')}
-            className="bg-white rounded-2xl border border-[#E8E2D7] p-3 flex flex-col items-center gap-1.5 touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+            className="bg-white rounded-2xl border border-[#E8E2D7] p-3 flex flex-col items-center gap-1.5 sm:flex-row sm:gap-3 sm:p-4 touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
           >
-            <div className="w-11 h-11 rounded-xl bg-[#F4EFE6] flex items-center justify-center">
+            <div className="w-11 h-11 rounded-xl bg-[#F4EFE6] flex items-center justify-center shrink-0">
               <img src="/assets/bangles-Dazgn-L6.webp" alt="" className="w-8 h-8 object-contain" />
             </div>
-            <span className="text-[11px] font-semibold text-[#25241F] text-center leading-tight">Batch Photography</span>
+            <span className="text-[11px] font-semibold text-[#25241F] text-center sm:text-left sm:text-[13px] leading-tight">Batch Photography</span>
           </button>
 
           {/* AI Model Photoshoot */}
           <button
             onClick={() => navigate('/create?mode=model')}
-            className="bg-white rounded-2xl border border-[#E8E2D7] p-3 flex flex-col items-center gap-1.5 touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+            className="bg-white rounded-2xl border border-[#E8E2D7] p-3 flex flex-col items-center gap-1.5 sm:flex-row sm:gap-3 sm:p-4 touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
           >
-            <div className="w-11 h-11 rounded-xl bg-[#F4EFE6] flex items-center justify-center">
+            <div className="w-11 h-11 rounded-xl bg-[#F4EFE6] flex items-center justify-center shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#92772D" strokeWidth="1.5">
                 <circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
                 <path d="M19 3l1.5 1.5M5 3L3.5 4.5"/>
               </svg>
             </div>
-            <span className="text-[11px] font-semibold text-[#25241F] text-center leading-tight">AI Model Photoshoot</span>
+            <span className="text-[11px] font-semibold text-[#25241F] text-center sm:text-left sm:text-[13px] leading-tight">AI Model Photoshoot</span>
           </button>
         </div>
       </div>
@@ -175,7 +175,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           {projects.slice(0, 4).map((project) => (
             <div
               key={project.id}
@@ -222,7 +222,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <button
               key={tmpl.id}
               onClick={() => navigate(`/create?template=${tmpl.id}`)}
-              className="shrink-0 w-[88px] bg-white rounded-2xl border border-[#E8E2D7] overflow-hidden touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+              className="shrink-0 w-[88px] sm:w-[120px] lg:w-[140px] bg-white rounded-2xl border border-[#E8E2D7] overflow-hidden touch-press shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
             >
               <div className="aspect-square bg-[#F4EFE6]">
                 <img

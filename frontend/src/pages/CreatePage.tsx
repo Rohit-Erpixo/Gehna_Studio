@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { ChevronLeft, UploadCloud, CheckCircle2, Sparkles, Download, RefreshCw, ArrowRight, Image as ImageIcon, AlertCircle } from 'lucide-react';
 import { api, resolveImageUrl } from '../services/api';
 
@@ -74,6 +75,7 @@ const StepHeader: React.FC<{
 // ─── Main Component ───
 export const CreatePage: React.FC = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [step, setStep] = useState(1);
@@ -204,6 +206,8 @@ export const CreatePage: React.FC = () => {
         status: 'approved',
         versions: 1,
       });
+      // Shell caches projects for 60s; refetch so Gallery/Home show the new shoot
+      await queryClient.invalidateQueries({ queryKey: ['recentProjects'] });
 
       // Trigger download
       const finalUrl = resolveImageUrl(generatedUrl);
@@ -226,7 +230,7 @@ export const CreatePage: React.FC = () => {
 
   // ─── Step 1: Upload + Product Details ───
   if (step === 1) return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-[100px]">
+    <div className="max-w-2xl mx-auto">
       <StepHeader step={1} total={4} title="Create Photoshoot" onBack={goBack} />
 
       <div className="px-4 pt-4 space-y-4">
@@ -331,14 +335,14 @@ export const CreatePage: React.FC = () => {
 
   // ─── Step 2: Choose Style ───
   if (step === 2) return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-[100px]">
+    <div className="max-w-2xl mx-auto">
       <StepHeader step={2} total={4} title="Choose a Style" onBack={goBack} />
 
       <div className="px-4 pt-4 space-y-4">
         <p className="text-[12px] text-[#636059]">Select a photography style for your product</p>
 
         {/* 2-column style grid */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {STYLES.map(s => {
             const isSelected = selectedStyle === s.key;
             return (
@@ -400,7 +404,7 @@ export const CreatePage: React.FC = () => {
 
   // ─── Step 3: Preview & Adjustments ───
   if (step === 3) return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-[100px]">
+    <div className="max-w-2xl mx-auto">
       <StepHeader step={3} total={4} title="Preview & Adjust" onBack={goBack} />
 
       <div className="px-4 pt-4 space-y-4">
@@ -506,7 +510,7 @@ export const CreatePage: React.FC = () => {
   const canApprove = Boolean(generatedUrl && imageLoaded && !imageLoadError && !isSaving);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-[100px]">
+    <div className="max-w-2xl mx-auto">
       <StepHeader step={4} total={4} title="Review Result" onBack={goBack} />
 
       <div className="px-4 pt-4 space-y-4">

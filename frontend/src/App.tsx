@@ -46,7 +46,8 @@ const MainLayout: React.FC = () => {
   const isFullScreen = FULL_SCREEN_PATHS.some(p => location.pathname.startsWith(p));
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] flex flex-col max-w-md mx-auto relative overflow-x-hidden shadow-[0_0_60px_rgba(0,0,0,0.08)]">
+    // No overflow-* here or on <main>: it would turn them into scroll containers and break sticky headers.
+    <div className="min-h-screen bg-[#FAF8F3] md:pl-20 lg:pl-60">
       {!isFullScreen && (
         <TopHeader
           userCredits={userCredits}
@@ -54,7 +55,8 @@ const MainLayout: React.FC = () => {
         />
       )}
 
-      <main className="flex-1 overflow-y-auto">
+      {/* Bottom padding clears the mobile bottom nav; on md+ the nav is a side rail */}
+      <main className="mx-auto w-full max-w-6xl pb-[calc(80px_+_env(safe-area-inset-bottom))] md:px-4 md:pt-4 md:pb-10 lg:px-8">
         <Routes>
           <Route
             path="/"

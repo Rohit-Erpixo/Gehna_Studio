@@ -38,13 +38,15 @@ const MOCK_GALLERY: (StudioProject & { versions?: number })[] = [
   },
 ];
 
+// Keys + labels must match CATEGORIES in CreatePage (jewellery_set is labelled "Necklace" there)
 const FILTERS = [
-  { key: 'all',          label: 'All Pieces' },
-  { key: 'jewellery_set', label: 'Bridal Sets' },
-  { key: 'ring',         label: 'Rings' },
-  { key: 'earring',      label: 'Earrings' },
-  { key: 'pendant',      label: 'Necklaces' },
-  { key: 'anklet',       label: 'Anklets' },
+  { key: 'all',           label: 'All Pieces' },
+  { key: 'jewellery_set', label: 'Necklaces' },
+  { key: 'ring',          label: 'Rings' },
+  { key: 'earring',       label: 'Earrings' },
+  { key: 'pendant',       label: 'Pendants' },
+  { key: 'bracelet',      label: 'Bracelets' },
+  { key: 'anklet',        label: 'Anklets' },
 ];
 
 const STATUS_FILTERS = ['All', 'Approved', 'Ready', 'Processing'];
@@ -87,14 +89,14 @@ const DetailModal: React.FC<DetailModalProps> = ({ project, onClose }) => {
     : resolveImageUrl(project.thumbnail_url);
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/70 flex flex-col" onClick={onClose}>
+    <div className="fixed inset-0 z-[100] bg-black/70 flex flex-col sm:items-center sm:justify-center sm:p-6" onClick={onClose}>
       <div
-        className="mt-auto bg-[#FAF8F3] rounded-t-3xl max-h-[90vh] overflow-y-auto"
+        className="mt-auto sm:mt-0 w-full sm:max-w-lg bg-[#FAF8F3] rounded-t-3xl sm:rounded-3xl max-h-[90vh] overflow-y-auto safe-bottom"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Handle + Header */}
         <div className="sticky top-0 bg-[#FAF8F3] z-10 px-4 pt-3 pb-2 border-b border-[#E8E2D7]">
-          <div className="w-10 h-1 bg-[#E8E2D7] rounded-full mx-auto mb-3" />
+          <div className="w-10 h-1 bg-[#E8E2D7] rounded-full mx-auto mb-3 sm:hidden" />
           <div className="flex items-center justify-between">
             <h2 className="font-['Cinzel',serif] text-[16px] font-bold text-[#25241F] truncate pr-2">{project.title}</h2>
             <button onClick={onClose} className="w-8 h-8 rounded-full bg-[#F4EFE6] flex items-center justify-center touch-press">
@@ -241,7 +243,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ projects = [] }) => {
       {/* Detail slide-up modal */}
       {selected && <DetailModal project={selected} onClose={() => setSelected(null)} />}
 
-      <div className="min-h-screen bg-[#FAF8F3] pb-[80px]">
+      <div>
 
         {/* ─── Header ─── */}
         <div className="px-4 pt-4 pb-2">
@@ -348,7 +350,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ projects = [] }) => {
               <p className="text-[12px] text-[#636059]">Try adjusting your search or filters</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
               {filtered.map((item) => (
                 <div
                   key={item.id}
@@ -396,10 +398,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ projects = [] }) => {
         </div>
 
         {/* ─── New Photoshoot FAB ─── */}
-        <div className="px-4 mt-6 mb-4">
+        <div className="px-4 mt-6 mb-4 flex justify-center">
           <button
             onClick={() => navigate('/create')}
-            className="w-full py-3.5 rounded-2xl bg-[#92772D] text-white font-bold text-[14px] flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(146,119,45,0.35)] touch-press"
+            className="w-full sm:w-auto sm:px-10 py-3.5 rounded-2xl bg-[#92772D] text-white font-bold text-[14px] flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(146,119,45,0.35)] touch-press"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>

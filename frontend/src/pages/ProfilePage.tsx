@@ -25,7 +25,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ userCredits, packages 
   const ownerName = userCredits?.owner_name || 'Priya Sharma';
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] pb-[80px]">
+    <div className="max-w-2xl mx-auto">
       {/* Profile Hero Card */}
       <div className="mx-4 mt-4 bg-white rounded-3xl border border-[#E8E2D7] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
         {/* Top gradient strip */}
@@ -59,8 +59,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ userCredits, packages 
 
       {/* Credit Packages */}
       {showPackages && (
-        <div className="mx-4 mt-3 space-y-2">
-          <p className="text-[13px] font-bold text-[#25241F] px-1">Choose a Credit Package</p>
+        <div className="mx-4 mt-3 grid sm:grid-cols-2 gap-2">
+          <p className="sm:col-span-2 text-[13px] font-bold text-[#25241F] px-1">Choose a Credit Package</p>
           {pkgs.map(pkg => (
             <div
               key={pkg.id}
@@ -102,7 +102,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ userCredits, packages 
             }`}
           >
             <div className="w-9 h-9 rounded-xl bg-[#F4EFE6] flex items-center justify-center shrink-0">
-              <Icon className="w-4.5 h-4.5 text-[#92772D]" strokeWidth={1.8} />
+              <Icon className="w-[18px] h-[18px] text-[#92772D]" strokeWidth={1.8} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[13px] font-semibold text-[#25241F]">{label}</p>
